@@ -2,6 +2,10 @@ from package.addressbook import Phone, Email
 from package.note_book import Note, Notebook
 import os
 import pickle
+import pathlib
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+from package.james_logic import *
 
 RED = "\033[91m"
 GREEN = "\033[92m"
@@ -12,29 +16,13 @@ with open('image.txt', 'r') as fh:
     all_file = fh.read()
     print(f'{RED}{all_file}{RESET}')
 
-notebook = Notebook()
+# notebook = Notebook()
 
 exit_list = ('exit', 'quit', 'end')
 note_list = list()
-note_file = './data/notebook.dat'
-phone_file = './data/phonebook.dat'
 
 
 notes_id = 0
-list_notes = ['{:^85}'.format(
-    '_'*85), '|{:^15}|{:^55}|{:^15}|'.format('Title', 'Note',
-                                             'Tags'), '{:^85}'.format(
-    '_'*85)]
-
-
-def save():
-    Notebook.save_to_file(notebook, note_file)
-    # print(f'notebook file {note_file} saved successfuly')
-
-
-def load():
-    Notebook.load_from_file(notebook, note_file)
-    # print(f'notebook file {note_file} loaded successfuly')
 
 
 def main():
@@ -46,26 +34,28 @@ def main():
             # Notebook.save_to_file(notebook, note_file)
             # print(Notebook.save_to_file(notebook, note_file))
             save()
+            print(f'Good bye and have a nice day!')
             quit()
 
         elif operation.startswith('create_note'):
-            id_counter = 0
-            # x = input("Note's name: ")
-            x = id_counter
-            y = input("Note's title: ")
-            z = input("Note's info: ")
+            create_note()
+            # id_counter = 0
+            # # x = input("Note's name: ")
+            # x = id_counter
+            # y = input("Note's title: ")
+            # z = input("Note's info: ")
 
-            x = Note(y, z)
-            # note_list.append(x)
+            # x = Note(y, z)
+            # # note_list.append(x)
 
-            while True:
-                tag_adder = input("Note's tag: ")
-                if tag_adder.startswith('e'):
-                    break
-                else:
-                    x.add_teg(tag_adder)
-            notebook.add_note(x)
-            id_counter += 1
+            # while True:
+            #     tag_adder = input("Note's tag: ")
+            #     if tag_adder.startswith('e'):
+            #         break
+            #     else:
+            #         x.add_teg(tag_adder)
+            # notebook.add_note(x)
+            # id_counter += 1
 
         elif operation.startswith('show_notes'):
 
@@ -91,8 +81,9 @@ def main():
             if not os.path.exists('note_file'):
                 print('The file is not exist')
                 pass
-            load()
-            print(f'Notes file load sucessful')
+            else:
+                load()
+                print(f'Notes file load sucessful')
 
         elif operation.startswith('find_tag'):
             find_tag = input('Enter the tag: ')

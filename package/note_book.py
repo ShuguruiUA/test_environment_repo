@@ -63,42 +63,41 @@ class Notebook(UserDict):
             pass
 
 
-notebook = Notebook()
-cleans = Note('прибрати кімнату', 'віник,  вода і інше')
-cleans.add_teg('необовязкове')
-cleans.add_teg('щоденне')
+if __name__ == "__main__":
+    notebook = Notebook()
+    cleans = Note('прибрати кімнату', 'віник,  вода і інше')
+    cleans.add_teg('необовязкове')
+    cleans.add_teg('щоденне')
 
-notebook.add_note(cleans)
+    notebook.add_note(cleans)
 
-cleeps = Note(
-    'лягти спати', 'поставити будильник на 22 год і одразу лягти спати')
-cleeps.add_teg('обовязкове')
-cleeps.add_teg('щоденне')
+    cleeps = Note(
+        'лягти спати', 'поставити будильник на 22 год і одразу лягти спати')
+    cleeps.add_teg('обовязкове')
+    cleeps.add_teg('щоденне')
 
-notebook.add_note(cleeps)
+    notebook.add_note(cleeps)
 
-sleep = Note(
-    'лягти спати', 'шось інше')
-sleep.add_teg('щоденне')
-notebook.add_note(sleep)
+    sleep = Note(
+        'лягти спати', 'шось інше')
+    sleep.add_teg('щоденне')
+    notebook.add_note(sleep)
 
-notebook_2 = Notebook()
+    notebook_2 = Notebook()
 
+    # print(notebook)
+    print('-'*100)
+    s = Notebook.show_all(notebook)
+    print(s)
+    # for s in notebook:
+    #     print(notebook[s])
 
-# print(notebook)
-print('-'*100)
-s = Notebook.show_all(notebook)
-print(s)
-# for s in notebook:
-#     print(notebook[s])
+    # # req = notebook.find('.будильник')
+    # # print(req)
+    # # notebook.delete(req)
+    # # print(notebook)
 
+    # search_result = notebook.search('поставити')
 
-# # req = notebook.find('.будильник')
-# # print(req)
-# # notebook.delete(req)
-# # print(notebook)
-
-# search_result = notebook.search('поставити')
-
-# for result in search_result:
-#     print(result)
+    # for result in search_result:
+    #     print(result)
