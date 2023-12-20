@@ -105,8 +105,9 @@ def show_contacts():
         print(value)
     
 def find_phone():
-    pass
-    #Daryna 
+    s = input('Enter a phone that you want to find: ')
+    for item in addressbook.find_phone(s):
+        print(item) 
     
 if __name__ == "__main__":
     pass
