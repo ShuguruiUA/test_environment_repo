@@ -62,19 +62,20 @@ def main():
             # id_counter += 1
 
         elif operation.startswith('show_notes'):
+            show_notes()
 
-            for value in notebook.values():
-                print(
-                    f'Title: {value.note_title} | Note: {value.note_body} | Tags: {"; ".join(t for t in value.tags)}')
+            # for value in notebook.values():
+            #     print(
+            #         f'Title: {value.note_title} | Note: {value.note_body} | Tags: {"; ".join(t for t in value.tags)}')
 
             # for k, v in notebook.items():
-                #     x = v.note_title
-                #     y = v.note_body
-                #     z = '; '.join(p for p in v.tags)
-                #     list_notes.append('|{:^15}|{:<55}|{:^15}'.format(x, y, z))
-                # return [print(el) for el in list_notes]
-                # print(
-                # f'Title: {v.note_title}, Note: {v.note_body} Tags: {"; ".join(p for p in v.tags)}')
+            #     x = v.note_title
+            #     y = v.note_body
+            #     z = '; '.join(p for p in v.tags)
+            #     list_notes.append('|{:^15}|{:<55}|{:^15}'.format(x, y, z))
+            # return [print(el) for el in list_notes]
+            # print(
+            # f'Title: {v.note_title}, Note: {v.note_body} Tags: {"; ".join(p for p in v.tags)}')
             # print(Notebook.show_all(notebook))
             # for x in note_list:
             #     print(x)
