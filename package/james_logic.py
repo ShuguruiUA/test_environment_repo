@@ -1,5 +1,5 @@
-from note_book import Note, Notebook
-from addressbook import AddressBook
+from package.note_book import *
+from package.addressbook import *
 import os
 notebook = Notebook()
 addressbook = AddressBook()
@@ -31,18 +31,23 @@ def create_note():
     id_counter = 0
     x = id_counter
     y = input("Note's title: ")
-    z = input("Note's info: ")
 
-    x = Note(y, z)
+    if y in notebook:
+        print('This name already exist, please choose another one')
+    else:
 
-    while True:
-        tag_adder = input("Note's tag: ")
-        if tag_adder.startswith('e'):
-            break
-        else:
-            x.add_teg(tag_adder)
-    notebook.add_note(x)
-    id_counter += 1
+        z = input("Note's info: ")
+
+        x = Note(y, z)
+
+        while True:
+            tag_adder = input("Note's tag: ")
+            if tag_adder.startswith('e'):
+                break
+            else:
+                x.add_teg(tag_adder)
+        notebook.add_note(x)
+        id_counter += 1
 
 
 if __name__ == "__main__":

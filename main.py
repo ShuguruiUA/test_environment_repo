@@ -1,5 +1,5 @@
-from package.addressbook import Phone, Email
-from package.note_book import Note, Notebook
+# from package.addressbook import Phone, Email
+# from package.note_book import Note, Notebook
 import os
 import pickle
 import pathlib
@@ -24,11 +24,15 @@ note_list = list()
 
 notes_id = 0
 
+command_menu = WordCompleter(['create_note', 'show_notes', 'save_notes', 'load_notes',
+                              'quit', 'exit'])
+
 
 def main():
     load()
     while True:
-        operation = input('Bond says: ').lower()
+        # input('Bond says: ').lower()
+        operation = prompt('Bond says: ', completer=command_menu)
 
         if operation.startswith(exit_list):
             # Notebook.save_to_file(notebook, note_file)
@@ -85,9 +89,9 @@ def main():
                 load()
                 print(f'Notes file load sucessful')
 
-        elif operation.startswith('find_tag'):
-            find_tag = input('Enter the tag: ')
-            Notebook.find_note_teg(notebook, find_tag)
+        # elif operation.startswith('find_tag'):
+        #     find_tag = input('Enter the tag: ')
+        #     Notebook.find_note_teg(notebook, find_tag)
 
         else:
             pass
