@@ -106,8 +106,11 @@ def show_contacts():
     
 def find_phone():
     s = input('Enter a phone that you want to find: ')
-    for item in addressbook.find_phone(s):
+    for item in addressbook.value(s):
         print(item) 
-    
+
+def remove_phone():
+
+
 if __name__ == "__main__":
     pass
