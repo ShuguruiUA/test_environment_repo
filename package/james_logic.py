@@ -12,15 +12,13 @@ addressbook = AddressBook()
 note_file = './data/notebook.dat'
 phone_file = './data/phonebook.dat'
 
-table_notes = Table(title='List of notes')
-table_notes.add_column('Title', justify='center', style='cyan', no_wrap=True)
-table_notes.add_column('Note', justify='full', style='cyan')
-table_notes.add_column('Tags', justify='right', style='cyan')
+table_notes = Table(title='[italic #FF6C00]List of notes :heavy_check_mark:', header_style='#FF6C00', show_lines=True, border_style='#F0F0F0')
+table_notes.add_column('Title', justify='center', style='#FF6C00', no_wrap=True, min_width=16)
+table_notes.add_column('Note', justify='center', style='#FF6C00', min_width=60)
+table_notes.add_column('Tags', justify='center', style='#FF6C00', min_width=16)
 console = Console()
 
 
-def operation_commands():
-    pass
 
 
 def save():
@@ -38,34 +36,69 @@ def load():
 
 
 def create_note():
-    id_counter = 0
+    note_title = input("Note's title: ")
+    note_body = input("Note's info: ")
+    note_title = Note(note_title, note_body)
+    while True:
+        tag_adder = input("Note's tag: ")
+        if tag_adder.startswith('e'):
+            break
+        else:
+            note_title.add_tag(tag_adder)
+    notebook.add_note(note_title)
+    
+"""    id_counter = 0
     x = id_counter
-    y = input("Note's title: ")
+    note_title = input("Note's title: ")
 
-    if y in notebook:
+    if note_title in notebook:
         print('This name already exist, please choose another one')
+        
     else:
 
-        z = input("Note's info: ")
+        note_body = input("Note's info: ")
 
-        x = Note(y, z)
+        x = Note(note_title, note_body)
 
         while True:
             tag_adder = input("Note's tag: ")
             if tag_adder.startswith('e'):
                 break
             else:
-                x.add_teg(tag_adder)
+                x.add_tag(tag_adder)
         notebook.add_note(x)
-        id_counter += 1
+        id_counter += 1"""
 
 
 def show_notes():
     for v in notebook.values():
         table_notes.add_row(v.note_title, v.note_body,
-                            '; '.join(p for p in v.tags))
+                            '\n'.join(p for p in v.tags))
     console.print(table_notes)
+    
+def find_tag():
+    s = input('Enter a tag that you want to find: ')
+    for item in notebook.find_note_tag(s):
+        print(item)
+        
+    
+#Логіка телефонної книги має бути тут
 
-
+def create_contact():
+    name = input('Enter the name: ')
+    name = Record(name)
+    phone = input('Enter the phone in format"": ')
+    name.add_phone(phone)
+    birthday = input('Enter  birthday in format DD.MM.YYYY: ')
+    name.add_birthday(birthday)
+    email = input('Enter the contact email: ')
+    name.add_email(email)
+    address = input('Enter the address: ')
+    name.add_address(address)
+    
+def show_contacts():
+    for value in addressbook.values():
+        print({value.name}, {value.phone}, {value.email}, {value.address})
+    
 if __name__ == "__main__":
     pass

@@ -9,7 +9,7 @@ class Note:
         self.note_body = note_body
         self.tags = []
 
-    def add_teg(self, tag):
+    def add_tag(self, tag):
         self.tags.append(tag)
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Notebook(UserDict):
         if isinstance(note, Note):
             self.data[note.note_title] = note
 
-    def find_note_teg(self, tag):
+    def find_note_tag(self, tag):
         res = None
         res = []
         for note in self.data.values():
@@ -42,9 +42,9 @@ class Notebook(UserDict):
     def delete(self, title):
         self.pop(title, None)
 
-    def delete(self, note):
-        if note in self.data:
-            del self.data[note]
+    # def delete(self, note):
+    #     if note in self.data:
+    #         del self.data[note]
 
     def save_to_file(self, file):
         with open(file, 'wb') as fh:
@@ -66,36 +66,48 @@ class Notebook(UserDict):
 if __name__ == "__main__":
     notebook = Notebook()
     cleans = Note('прибрати кімнату', 'віник,  вода і інше')
-    cleans.add_teg('необовязкове')
-    cleans.add_teg('щоденне')
+    cleans.add_tag('необовязкове')
+    cleans.add_tag('щоденне')
 
     notebook.add_note(cleans)
 
-    cleeps = Note(
-        'лягти спати', 'поставити будильник на 22 год і одразу лягти спати')
-    cleeps.add_teg('обовязкове')
-    cleeps.add_teg('щоденне')
+    cleeps = Note('лягти спати', 'поставити будильник на 22 год і одразу лягти спати')
+    cleeps.add_tag('обовязкове')
+    cleeps.add_tag('щоденне')
 
     notebook.add_note(cleeps)
 
-    sleep = Note(
-        'лягти спати', 'шось інше')
-    sleep.add_teg('щоденне')
-    notebook.add_note(sleep)
+    # sleep = Note(
+    #     'лягти спати', 'шось інше')
+    # sleep.add_tag('щоденне')
+    # notebook.add_note(sleep)
 
-    notebook_2 = Notebook()
+    print(notebook)
+    for item in notebook.find_note_tag('щоденне'):
+        print(item)
+    print('0-----0')
+    for value in notebook.search('2'):
+        print(value)
+    #print(notebook.find_note_tag('щоденне'))
+    #notebook_2 = Notebook()W
 
+    # req = notebook.show_all()
+    # print(req)
     # print(notebook)
     print('-'*100)
-    s = Notebook.show_all(notebook)
-    print(s)
+    # s = Notebook.show_all(notebook)
+    # print(s)
+    
+    
+    # req = notebook.find_note_teg('щоденно')
+    # print(req)
     # for s in notebook:
     #     print(notebook[s])
 
-    # # req = notebook.find('.будильник')
-    # # print(req)
-    # # notebook.delete(req)
-    # # print(notebook)
+    # req = notebook.search('будильник')
+    # print(req)
+    #notebook.delete(req)
+    #print(notebook)
 
     # search_result = notebook.search('поставити')
 
