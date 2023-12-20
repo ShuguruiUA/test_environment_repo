@@ -90,7 +90,7 @@ def find_tag():
 def create_contact():
     name = input('Enter the name: ')
     name = Record(name)
-    phone = input('Enter the phone in format"": ')
+    phone = input('Enter the phone in format "1234567890": ')
     name.add_phone(phone)
     birthday = input('Enter  birthday in format DD.MM.YYYY: ')
     name.add_birthday(birthday)
@@ -103,6 +103,10 @@ def create_contact():
 def show_contacts():
     for value in addressbook.values():
         print(value)
+    
+def find_phone():
+    pass
+    #Daryna 
     
 if __name__ == "__main__":
     pass

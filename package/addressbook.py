@@ -71,7 +71,7 @@ class Phone(Field):
         if len(new_value) == 10 and new_value.isdigit():
             self.__value = new_value
         else:
-            raise ValueError("invalid phone number")
+            raise ValueError("invalid phone number") 
 
     def __str__(self):
         return self.value
@@ -217,12 +217,12 @@ if __name__ == "__main__":
     #info_data = book.search_informathion("T")
     # for name_, record_ in info_data.items:
     #     print(record_)
-    tom = Record("Tom","1234567890", "25-05-1992", "tom@gmail.com", "Kherson")
+    tom = Record("Tom","123456789", "25.05.1992", "tom@gmail.com", "Kherson")
     print(tom)
     nick = Record("Nick")
     nick.add_phone("0987654321")
     print(nick.phones[0].value)
-    nick.add_birthday("30-05-1991")
+    nick.add_birthday("30.05.1991")
     print(nick.birthday.value)
     print(nick.email.value)
     nick.add_email("nick@gmail.com")
