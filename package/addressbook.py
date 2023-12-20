@@ -91,7 +91,7 @@ class Birthday(Field):
     @classmethod
     def is_valid_value(cls, date_birthday):
         try:
-            datetime.strptime(date_birthday, '%d-%m-%Y')
+            datetime.strptime(date_birthday, '%d.%m.%Y')
             return True
         except ValueError:
             return False
@@ -185,14 +185,14 @@ class AddressBook(UserDict):
         if record_book:
             del self.data[name_]
 
-    def saved_to_file(self):
-        with open(self.file_name, "wb") as fh:
+    def saved_to_file(self, file):
+        with open(file, "wb") as fh:
             pickle.dump(self.data, fh)
-            print(type(fh))
+            #print(type(fh))
 
-    def load_from_file(self):
+    def load_from_file(self, file):
         try:
-            with open(self.file_name, "rb") as fh:
+            with open(file, "rb") as fh:
                 self.data = pickle.load(fh)
         except FileNotFoundError:
             print("File not found")

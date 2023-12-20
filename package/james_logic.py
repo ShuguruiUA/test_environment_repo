@@ -25,13 +25,16 @@ def save():
     if not os.path.exists('./data/'):
         os.makedirs('./data/')
         Notebook.save_to_file(notebook, note_file)
+        AddressBook.saved_to_file(addressbook, phone_file)
     else:
         Notebook.save_to_file(notebook, note_file)
+        AddressBook.saved_to_file(addressbook, phone_file)
     # print(f'notebook file {note_file} saved successfuly')
 
 
 def load():
     Notebook.load_from_file(notebook, note_file)
+    AddressBook.load_from_file(addressbook, phone_file)
     # print(f'notebook file {note_file} loaded successfuly')
 
 
@@ -95,10 +98,11 @@ def create_contact():
     name.add_email(email)
     address = input('Enter the address: ')
     name.add_address(address)
+    addressbook.add_record(name)
     
 def show_contacts():
     for value in addressbook.values():
-        print({value.name}, {value.phone}, {value.email}, {value.address})
+        print(value)
     
 if __name__ == "__main__":
     pass

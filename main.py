@@ -30,7 +30,10 @@ command_menu = WordCompleter(['create_note', 'show_notes', 'save_notes', 'load_n
 
 
 def main():
-    load()
+    if not os.path.exists(note_file):
+        pass
+    else:
+        load()
     print(notebook)
     while True:
         # input('Bond says: ').lower()
