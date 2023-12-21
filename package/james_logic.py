@@ -121,34 +121,8 @@ def add_phone():
         
     
 def find_phone():
-    name = input('Input contact name: ')
-    for v in addressbook.values():
-       if name == v.name.value:
-            _ = addressbook[name]
-            s = input('Enter a phone that you want to find: ')
-            _res =  Record.find_phone(_, s)
-            print(_res)
-       else:
-           print(f'{name} not found in the records')
-           
-def delete_contact():
-    name = input('Enter the name: ')
-    if not name in addressbook:
-        return f'contact {name} is not found'
-    contact = addressbook.delete(name)
-    return print(f'contact {contact} was deleted')
-
-def remove_phone():
-    name = input('Enter your name: ')
-    if not name in addressbook:
-        return print(f'There is no {name} in phonebook')
-    name_ = addressbook[name]
-    s = input('Enter a phone number that you want to delete: ')
-    res_ = Record.find_phone(name_, s)
-    if res_:
-        Record.remove_phone(addressbook[name], str(res_))
-        return print(f'Phone number {res_} was successfuly removed from {name}\'s contact')
-    return print(f'Phone number {s} not belongs to {name}\'s contact ')
+    pass
+    #Daryna 
     
 if __name__ == "__main__":
     pass
