@@ -26,7 +26,7 @@ note_list = list()
 notes_id = 0
 
 command_menu = WordCompleter(['create_note', 'show_notes', 'save_notes', 'load_notes',
-                              'quit', 'exit', 'find_tag', 'create_contact', 'show_contacts'])
+                              'quit', 'exit', 'find_tag', 'create_contact', 'show_contacts','find_record', 'add_phone', 'find_phone', 'delete_contact', 'remove_phone'])
 
 
 def main():
@@ -34,10 +34,9 @@ def main():
         pass
     else:
         load()
-    print(notebook)
     while True:
         # input('Bond says: ').lower()
-        operation = prompt('Bond says: ', completer=command_menu)
+        operation = prompt('Bond says: ', completer=command_menu).lower()
 
         if operation.startswith(exit_list):
 
@@ -73,6 +72,23 @@ def main():
             
         elif operation.startswith('show_contacts'):
             show_contacts()
+            
+        elif operation.startswith('find_record'):
+            find_record()
+            
+        elif operation.startswith('add_phone'):
+            add_phone()
+            
+            
+        elif operation.startswith('find_phone'):
+            find_phone()
+            
+        elif operation.startswith('delete_contact'):
+            delete_contact()
+            # return f'contact {delete_contact} was delete successfuly'
+            
+        elif operation.startswith('remove_phone'):
+            remove_phone()
 
         else:
             pass

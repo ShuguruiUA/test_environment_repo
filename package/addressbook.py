@@ -109,7 +109,11 @@ class Record:
         self.email = Email(email)
         self.address = Address(address)
 
-
+    @staticmethod
+    def additonal_info(list_, value_):
+        
+        list_.append(value_)
+    
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
 
@@ -176,14 +180,20 @@ class AddressBook(UserDict):
 
     def add_record(self, record_: Record):
         self.data[record_.name.value] = record_
+        
+    # def delete_record(self, name):
+    #     del self.data[name]
 
-    def find(self, name_):
+    def find_record(self, name_):
         return self.data.get(name_)
 
-    def delete(self, name_):
-        record_book = self.find(name_)
-        if record_book:
-            del self.data[name_]
+    # def delete(self, name_):
+    #     record_book = self.find(name_)
+    #     if record_book:
+    #         del self.data[name_]
+    def delete(self, record):
+        if record in self.data:
+            del self.data[record]
 
     def saved_to_file(self, file):
         with open(file, "wb") as fh:
@@ -217,7 +227,7 @@ if __name__ == "__main__":
     #info_data = book.search_informathion("T")
     # for name_, record_ in info_data.items:
     #     print(record_)
-    tom = Record("Tom","123456789", "25.05.1992", "tom@gmail.com", "Kherson")
+    tom = Record("Tom","1234567890", "25.05.1992", "tom@gmail.com", "Kherson")
     print(tom)
     nick = Record("Nick")
     nick.add_phone("0987654321")
@@ -228,3 +238,6 @@ if __name__ == "__main__":
     nick.add_email("nick@gmail.com")
     nick.add_address("Odessa")
     print(nick)
+    print(nick.find_phone('0987654321'))
+    # s = Record.find_phone(, '1234567890')
+    # print(s)
