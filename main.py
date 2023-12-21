@@ -25,11 +25,11 @@ notes_id = 0
 
 command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-notes',
                               'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
-                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone', 'uncoming_birthdays'])
+                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone', 'uncoming-birthdays', 'clean-folder'])
 
 com_list = ['create-note', 'show-notes', 'save-notes', 'load-notes',
                               'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
-                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone','uncoming_birthdays']
+                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone','uncoming-birthdays','clean-folder']
 def main():
     if not os.path.exists(note_file):
         pass
@@ -66,6 +66,8 @@ def main():
         elif operation.startswith('find-tag'):
             find_tag()
 
+        elif operation.startswith('edit-note'):
+            edit_note()
 
         elif operation.startswith('create-contact'):
             create_contact()
@@ -102,8 +104,13 @@ def main():
         elif operation.startswith('remove-phone'):
             remove_phone()
         
-        elif operation.startswith('uncoming_birthdays'):
+        elif operation.startswith('uncoming-birthdays'):
             uncoming_birthdays()
+          
+        elif operation.startswith('clean-folder'):
+            clean()
+            
+        
 
         else:
             pass
