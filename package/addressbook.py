@@ -1,6 +1,6 @@
 import re
 from collections import UserDict
-from datetime import datetime
+from datetime import datetime, timedelta
 import pickle
 
 
@@ -115,7 +115,9 @@ class Record:
         list_.append(value_)
     
     def add_phone(self, phone):
-        self.phones.append(Phone(phone))
+        if not phone in self.phones.values:
+            self.phones.append(Phone(phone))
+        return print(f'Number {phone} already exist in contact {self.name.value}')
 
 
     def add_email(self, email):
@@ -163,6 +165,8 @@ class AddressBook(UserDict):
     def __init__(self):
         super().__init__()
         self.file_name = "addressBook.bin"
+        
+
 
     def iterator(self, n: int = 2):
         result = f"{'-' * 50}\n"
@@ -218,6 +222,24 @@ class AddressBook(UserDict):
                         correct_info += str(record_) + "\n"
                         break
         return correct_info
+    
+    def find_birthdays_in_days(self, days: int):
+        today = datetime.now()
+        target_date = today + timedelta(days=days)
+
+        result = []
+        for name_, record_ in self.data.items():
+            if record_.birthday.value:
+                birthday_date = datetime.strptime(record_.birthday.value, '%d.%m.%Y')
+                if today > birthday_date.replace(year=today.year):
+                    next_birthday_date = birthday_date.replace(year=today.year + 1)
+                else:
+                    next_birthday_date = birthday_date.replace(year=today.year)
+
+                days_until_birthday = (next_birthday_date - today).days
+
+                if 0 <= days_until_birthday <= days:
+                    result.append((record_, days_until_birthday))
 
 
 if __name__ == "__main__":

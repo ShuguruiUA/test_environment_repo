@@ -7,7 +7,6 @@ from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 from package.james_logic import *
 
-
 RED = "\033[91m"
 GREEN = "\033[92m"
 BLUE = "\033[94m"
@@ -22,13 +21,15 @@ with open('image.txt', 'r') as fh:
 exit_list = ('exit', 'quit', 'end')
 note_list = list()
 
-
 notes_id = 0
 
-command_menu = WordCompleter(['create_note', 'show_notes', 'save_notes', 'load_notes',
-                              'quit', 'exit', 'find_tag', 'create_contact', 'show_contacts','find_record', 'add_phone', 'find_phone', 'delete_contact', 'remove_phone'])
+command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-notes',
+                              'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
+                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone', 'uncoming_birthdays'])
 
-
+com_list = ['create-note', 'show-notes', 'save-notes', 'load-notes',
+                              'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
+                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone','uncoming_birthdays']
 def main():
     if not os.path.exists(note_file):
         pass
@@ -44,51 +45,65 @@ def main():
             print(f'Good bye and have a nice day!')
             quit()
 
-        elif operation.startswith('create_note'):
+        elif operation.startswith('create-note'):
             create_note()
 
 
-        elif operation.startswith('show_notes'):
+        elif operation.startswith('show-notes'):
             show_notes()
 
-        elif operation.startswith('save_notes'):
+        elif operation.startswith('save-notes'):
             save()
 
-        elif operation.startswith('load_notes'):
-            if not os.path.exists('note_file'):
+        elif operation.startswith('load-notes'):
+            if not os.path.exists('note-file'):
                 print('The file is not exist')
                 pass
             else:
                 load()
-                print(f'Notes file load sucessful')
+                print(f'Notes file load successful')
 
-        elif operation.startswith('find_tag'):
+        elif operation.startswith('find-tag'):
             find_tag()
 
-            
-        elif operation.startswith('create_contact'):
+
+        elif operation.startswith('create-contact'):
             create_contact()
-            
-            
-        elif operation.startswith('show_contacts'):
+
+
+        elif operation.startswith('show-contacts'):
             show_contacts()
-            
-        elif operation.startswith('find_record'):
+
+        elif operation.startswith('find-record'):
             find_record()
-            
-        elif operation.startswith('add_phone'):
+
+        elif operation.startswith('add-phone'):
             add_phone()
-            
-            
-        elif operation.startswith('find_phone'):
+
+        elif operation.startswith('add-email'):
+            add_email()
+
+        elif operation.startswith('add-address'):
+            add_address()
+
+        elif operation.startswith('add-birthday'):
+            add_birthday()
+
+        elif operation.startswith('edit-phone'):
+            edit_phone()
+
+        elif operation.startswith('find-phone'):
             find_phone()
-            
-        elif operation.startswith('delete_contact'):
+
+        elif operation.startswith('delete-contact'):
             delete_contact()
             # return f'contact {delete_contact} was delete successfuly'
-            
-        elif operation.startswith('remove_phone'):
+
+        elif operation.startswith('remove-phone'):
             remove_phone()
+        
+        elif operation.startswith('uncoming_birthdays'):
+            uncoming_birthdays()
 
         else:
             pass
@@ -96,4 +111,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

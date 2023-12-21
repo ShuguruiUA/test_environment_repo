@@ -3,6 +3,7 @@ from package.addressbook import *
 import os
 from rich.console import Console
 from rich.table import Table
+from datetime import date, datetime, timedelta
 
 
 notebook = Notebook()
@@ -31,7 +32,8 @@ def Record_Table():
 
 def save():
     if not os.path.exists('./data/'):
-        os.makedirs('./data/')
+        file_dir = os.mkdir('./data/')
+        file = open(file_dir / 'notebook.bin', 'a')
         Notebook.save_to_file(notebook, note_file)
         AddressBook.saved_to_file(addressbook, phone_file)
     else:
@@ -103,12 +105,14 @@ def add_phone():
     name = input('Input contact name: ')
     if name in addressbook:
         phone = input('Enter the phone in format "1234567890": ')
-        if phone in addressbook[name]:
-            return print(f'Phone {phone} is present in {name}\'s contacts')
-        else:
+        addressbook[name].additonal_info(addressbook[name].phones, Phone(phone))
+        return print(f'Phone {phone} was successfully added to {name}\'s contact')
+        # if phone in addressbook[name]:
+        #     return print(f'Phone {phone} is present in {name}\'s contacts')
+        # else:
             
-            addressbook[name].additonal_info(addressbook[name].phones, Phone(phone))
-            return print(f'Phone {phone} was successfully added to {name}\'s contact')
+            # addressbook[name].additonal_info(addressbook[name].phones, Phone(phone))
+            # return print(f'Phone {phone} was successfully added to {name}\'s contact')
             
     else:
         return print(f'{name}\'s contact does not exist in phone book, please create it first')
@@ -121,8 +125,104 @@ def add_phone():
         
     
 def find_phone():
-    pass
-    #Daryna 
+    phone_number = input('Enter a phone number to find: ')
+    
+    found_contacts = []
+    for name, contact in addressbook.items():
+        if any(phone.value == phone_number for phone in contact.phones):
+            found_contacts.append(contact)
+
+    if found_contacts:
+        console = Console()
+        table = Table(title=f'Contacts with phone number {phone_number}', header_style='#FF6C00', show_lines=True, border_style='#F0F0F0')
+        table.add_column('Name', justify='center', style='#FF6C00', no_wrap=True, min_width=16)
+        table.add_column('Phone', justify='center', style='#FF6C00', no_wrap=True, min_width=12)
+        table.add_column('Birthday', justify='center', style='#FF6C00', no_wrap=True, min_width=12)
+        table.add_column('Email', justify='center', style='#FF6C00', no_wrap=True, min_width=12)
+        table.add_column('Address', justify='center', style='#FF6C00', no_wrap=True, min_width=10)
+
+        for contact in found_contacts:
+            table.add_row(contact.name.value, ', '.join(str(phone.value) for phone in contact.phones),
+                          contact.birthday.value if contact.birthday else 'N/A', contact.email.value if contact.email else 'N/A',
+                          contact.address.value if contact.address else 'N/A')
+
+        console.print(table)
+    else:
+        print(f'No contacts found with phone number {phone_number}.')
+           
+def delete_contact():
+    name = input('Enter the name: ')
+    if not name in addressbook:
+        return f'contact {name} is not found'
+    contact = addressbook.delete(name)
+    return print(f'contact {contact} was deleted')
+
+def remove_phone():
+    name = input('Enter your name: ')
+    if not name in addressbook:
+        return print(f'There is no {name} in phonebook')
+    name_ = addressbook[name]
+    s = input('Enter a phone number that you want to delete: ')
+    res_ = Record.find_phone(name_, s)
+    if res_:
+        Record.remove_phone(addressbook[name], str(res_))
+        return print(f'Phone number {res_} was successfuly removed from {name}\'s contact')
+    return print(f'Phone number {s} not belongs to {name}\'s contact ')
+
+
+def add_email():
+    name = input('Enter the name: ')
+    if name in addressbook:
+        email = input('Enter the email in format "example@example.com": ')
+        record: Record = addressbook.find_record(name)
+        record.add_email(email)
+        return print(f"{email} for contact {name} added")
+    else:
+        return print(f"Contact not found. Please try again")
+
+
+def add_address():
+    name = input('Enter the name: ')
+    if name in addressbook:
+        address = input('Enter the address')
+        record: Record = addressbook.find_record(name)
+        record.add_address(address)
+        return print(f"{address} for contact {name} added")
+    else:
+        return print(f"Contact not found. Please try again")
+
+
+def add_birthday():
+    name = input('Enter the name: ')
+    if name in addressbook:
+        birthday = input('Enter the birthday in format dd.mm.yyyy')
+        record: Record = addressbook.find_record(name)
+        record.add_birthday(birthday)
+        return print(f"{birthday} for contact {name} added")
+    else:
+        return print(f"Contact not found. Please try again")
+
+
+
+def edit_phone():
+    name = input('Enter the name: ')
+    if name in addressbook:
+        old_phone = input('Enter the number phone for change')
+        new_phone = input('Enter the new phone')
+        record: Record = addressbook.find_record(name)
+        record.edit_phone(old_phone, new_phone)
+        return print(f"{old_phone} was changed {new_phone} for contact {name}")
+    else:
+        return print(f"Contact not found. Please try again")
+
+def uncoming_birthdays():
+    days = int(input('Enter the check period in days: '))
+    if days > 0:
+        for record, days_until_birthday in addressbook.find_birthdays_in_days(days):
+            print(f"{record.name.value}'s birthday in {days_until_birthday} days: {record.birthday.value}")
+    else:
+        print('The number of days can only be positive. Try again')
+        
     
 if __name__ == "__main__":
     pass
