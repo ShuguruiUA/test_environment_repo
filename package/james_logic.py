@@ -251,6 +251,9 @@ def uncoming_birthdays():
             print('No uncoming birthdays.')   
     else:
         print('The number of days can only be positive. Try again')
+
+
+################################ Сортувальник
         
 def clean():
     path = input('Enter path: ')
