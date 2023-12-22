@@ -5,16 +5,16 @@ import pickle
 import pathlib
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from package.james_logic import edit_note, delete_note, add_address, add_birthday, add_email, add_phone, edit_phone, remove_phone, save, load, note_file, find_phone, find_record, find_tag, uncoming_birthdays, create_contact, create_note, show_contacts, show_notes, delete_contact
+from package.james_logic import clean, boot_logo, edit_note, delete_note, add_address, add_birthday, add_email, add_phone, edit_phone, remove_phone, save, load, note_file, find_phone, find_record, find_tag, uncoming_birthdays, create_contact, create_note, show_contacts, show_notes, delete_contact
 
 RED = "\033[91m"
 GREEN = "\033[92m"
 BLUE = "\033[94m"
 RESET = "\033[0m"
 
-with open('image.txt', 'r') as fh:
-    all_file = fh.read()
-    print(f'{RED}{all_file}{RESET}')
+# with open('image.txt', 'r') as fh:
+#     all_file = fh.read()
+#     print(f'{RED}{all_file}{RESET}')
 
 # notebook = Notebook()
 
@@ -29,9 +29,8 @@ command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-n
                               'edit-phone', 'uncoming-birthdays', 'clean-folder', 'edit-note',
                               'delete-note'])
 
-com_list = ['create-note', 'show-notes', 'save-notes', 'load-notes',
-                              'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
-                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone','uncoming-birthdays','clean-folder']
+boot_logo()
+
 def main():
     if not os.path.exists(note_file):
         pass

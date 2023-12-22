@@ -127,7 +127,7 @@ class Record:
     
     # метод додавання номеру телефону контакту
     def add_phone(self, phone):
-        if not phone in self.phones.values:
+        if not phone in self.phones:
             self.phones.append(Phone(phone))
         return print(f'Number {phone} already exist in contact {self.name.value}')
 
