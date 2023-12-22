@@ -15,13 +15,12 @@ class Note:
         self.tags.append(tag)
 
     def __str__(self):
-        return f"Note name: {self.note_title}, tegs: {'; '.join(p for p in self.tags)}, note: {self.note_body}"
+        return f"Note name: {self.note_title}, note: {self.note_body},  tags: {'; '.join(p for p in self.tags)}"
 
 # Клас в якому зберфгаються нотатки
 
 class Notebook(UserDict):
-    # def __init__(self):
-    # self.file = file_path
+
     
     # метод додавання нотатки
     def add_note(self, note):
@@ -54,9 +53,6 @@ class Notebook(UserDict):
     def delete(self, title):
         self.pop(title, None)
 
-    # def delete(self, note):
-    #     if note in self.data:
-    #         del self.data[note]
     
     # метод збереження нотатки у файл
     def save_to_file(self, file):
@@ -76,55 +72,3 @@ class Notebook(UserDict):
             for note in self.data:
                 print(self.data[note])
             pass
-
-
-if __name__ == "__main__":
-    notebook = Notebook()
-    cleans = Note('прибрати кімнату', 'віник,  вода і інше')
-    cleans.add_tag('необовязкове')
-    cleans.add_tag('щоденне')
-
-    notebook.add_note(cleans)
-
-    cleeps = Note('лягти спати', 'поставити будильник на 22 год і одразу лягти спати')
-    cleeps.add_tag('обовязкове')
-    cleeps.add_tag('щоденне')
-
-    notebook.add_note(cleeps)
-
-    # sleep = Note(
-    #     'лягти спати', 'шось інше')
-    # sleep.add_tag('щоденне')
-    # notebook.add_note(sleep)
-
-    print(notebook)
-    for item in notebook.find_note_tag('щоденне'):
-        print(item)
-    print('0-----0')
-    for value in notebook.search('2'):
-        print(value)
-    #print(notebook.find_note_tag('щоденне'))
-    #notebook_2 = Notebook()W
-
-    # req = notebook.show_all()
-    # print(req)
-    # print(notebook)
-    print('-'*100)
-    # s = Notebook.show_all(notebook)
-    # print(s)
-    
-    
-    # req = notebook.find_note_teg('щоденно')
-    # print(req)
-    # for s in notebook:
-    #     print(notebook[s])
-
-    # req = notebook.search('будильник')
-    # print(req)
-    #notebook.delete(req)
-    #print(notebook)
-
-    # search_result = notebook.search('поставити')
-
-    # for result in search_result:
-    #     print(result)

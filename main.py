@@ -5,7 +5,7 @@ import pickle
 import pathlib
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from package.james_logic import *
+from package.james_logic import edit_note, delete_note, add_address, add_birthday, add_email, add_phone, edit_phone, remove_phone, save, load, note_file, find_phone, find_record, find_tag, uncoming_birthdays, create_contact, create_note, show_contacts, show_notes, delete_contact
 
 RED = "\033[91m"
 GREEN = "\033[92m"
@@ -25,7 +25,9 @@ notes_id = 0
 
 command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-notes',
                               'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
-                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 'edit-phone', 'uncoming-birthdays', 'clean-folder'])
+                              'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 
+                              'edit-phone', 'uncoming-birthdays', 'clean-folder', 'edit-note',
+                              'delete-note'])
 
 com_list = ['create-note', 'show-notes', 'save-notes', 'load-notes',
                               'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
@@ -68,6 +70,9 @@ def main():
 
         elif operation.startswith('edit-note'):
             edit_note()
+            
+        elif operation.startswith('delete-note'):
+            delete_note()
 
         elif operation.startswith('create-contact'):
             create_contact()
