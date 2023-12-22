@@ -127,9 +127,10 @@ class Record:
     
     # метод додавання номеру телефону контакту
     def add_phone(self, phone):
-        if not phone in self.phones:
+        if not phone in (str(ph) for ph in self.phones):
             self.phones.append(Phone(phone))
-        return print(f'Number {phone} already exist in contact {self.name.value}')
+            return f'Number {phone} already exist in contact {self.name.value}'
+        return f'Number {phone} is already available in contact {self.name.value}'  
 
     # метод додавання номеру електронної пошти контакту
     def add_email(self, email):

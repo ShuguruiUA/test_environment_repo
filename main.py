@@ -29,15 +29,12 @@ command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-n
                               'edit-phone', 'uncoming-birthdays', 'clean-folder', 'edit-note',
                               'delete-note'])
 
-boot_logo()
 
 def main():
-    if not os.path.exists(note_file):
-        pass
-    else:
-        load()
+    
+    boot_logo()
+    load()
     while True:
-        # input('Bond says: ').lower()
         operation = prompt('Bond says: ', completer=command_menu).lower()
 
         if operation.startswith(exit_list):

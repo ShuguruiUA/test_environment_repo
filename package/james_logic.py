@@ -17,8 +17,8 @@ notebook = Notebook()
 addressbook = AddressBook()
 console = Console()
 
-note_file = './data/notebook.dat'
-phone_file = './data/phonebook.dat'
+note_file = './notebook.bin'
+phone_file = './phonebook.bin'
 
 #Декоратор помилок
 
@@ -55,9 +55,10 @@ def Record_Table():
 # функціяи для збереження та завантаження нотаток і адресної книги
 @input_error
 def save():
-    if not os.path.exists('./data/'):
-        file_dir = os.mkdir('./data/')
-        file = open(file_dir / 'notebook.bin', 'a')
+    if not os.path.isfile(note_file) or not os.path.isfile(phone_file):
+     
+        file = open('./notebook.bin', 'a')
+        file2 = open('./phonebook.bin', 'a')
         Notebook.save_to_file(notebook, note_file)
         AddressBook.saved_to_file(addressbook, phone_file)
     else:
@@ -67,9 +68,13 @@ def save():
 
 @input_error
 def load():
-    Notebook.load_from_file(notebook, note_file)
-    AddressBook.load_from_file(addressbook, phone_file)
-    # print(f'notebook file {note_file} loaded successfuly')
+    if not os.path.isfile(note_file) or not os.path.isfile(phone_file):
+        file = open('./notebook.bin', 'a')
+        file2 = open('./phonebook.bin', 'a')
+    else: 
+        Notebook.load_from_file(notebook, note_file)
+        AddressBook.load_from_file(addressbook, phone_file)
+
 
 
 
@@ -197,15 +202,15 @@ def find_record():
 
 # функція додавання телефону до існуючого контакту?
 @input_error        
-def add_phone():        
+def add_phone():
     name = input('Input contact name: ')
-    if not name in addressbook:
-        return print(f'{name}\'s contact does not exist in phone book, please create it first')
-    else:
+    if name in addressbook:
         phone = input('Enter the phone in format "1234567890": ')
         record: Record = addressbook.find_record(name)
         res = record.add_phone(phone)
-        return print(f'Phone {phone} was successfuly added to {name}\' contact')
+        return print(res)
+    else:
+        return print(f'{name}\'s contact does not exist in phone book, please create it first')
         
 
         
