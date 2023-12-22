@@ -89,13 +89,14 @@ def create_note():
         note_body = input("Note's info: ")
         new_note_title = Note(new_note_title, note_body)
         while True:
-            tag_adder = input("Note's tag: ")
+            tag_adder = input("Note's tag (type 'e' for exit): ")
             if tag_adder.startswith('e'):
                 break
             else:
                 new_note_title.add_tag(tag_adder)
         notebook.add_note(new_note_title)
-        return print(f'Note {new_note_title} was added successfuly')
+
+        return print(f'Note {new_note_title.note_title} was added successfuly')
     return print(f'Note with {new_note_title} already exists')
 
 # функція виводу усіх збережених нотаток у формі таблиці
@@ -109,7 +110,7 @@ def show_notes():
 
 # функція пошуку нотатки за тегом
 @input_error    
-def find_tag():
+def find_tag(tag_to_find):
     tag_to_find = input('Enter a tag that you want to find: ')
     found_notes = []
     for note in notebook.find_note_tag(tag_to_find):
@@ -340,6 +341,35 @@ def clean():
 if __name__ == "__main__":
     pass
 
+# help
+def help():
+    boot_logo()
+    table_help = Table(title='[italic #FF6C00]Commands and description :question_mark:', header_style='#FF6C00', show_lines=True, border_style='#F0F0F0')
+    table_help.add_column('Command', justify='center', style='#2771ea', no_wrap=True, min_width= 16)
+    table_help.add_column('Description', justify='left', style='#2771ea', no_wrap=True, min_width=40)
+    table_help.add_row('create-contact', 'create a new contact. Required data = name, phone, birthday. Additional = email, address')
+    table_help.add_row('add-phone', 'add additional phone for existing contact')
+    table_help.add_row('add-email','add/change email address for existing contact')
+    table_help.add_row('add-birthday', 'add/change birthday for existing contact')
+    table_help.add_row('add-address', 'add/change address for existing contact')
+    table_help.add_row('edit-phone', 'change number for existing contact')
+    table_help.add_row('show-contacts', 'show all contacts in address book')
+    table_help.add_row('find-record','searching for records in address book by contact name and return result')
+    table_help.add_row('find-phone', 'looking for phone number in the address book if exists return all data for the contact')
+    table_help.add_row('remove-phone', 'remove phone number from the existing record')
+    table_help.add_row('delete-contact', 'delete record from address book')
+    table_help.add_row('uncoming-birthdays', 'shows days to birthday by period setted by user, by default 7 days')
+    table_help.add_row('create-note','create new note. Requires note title, note data, at least one tag, for exiting from adding tag please put "e"')
+    table_help.add_row('edit-note', 'allowed user to change note data in existing note by title')
+    table_help.add_row('show-notes','shows all available notes')
+    table_help.add_row('find-tag','searching for note by its tag, return table of notes with this tag')
+    table_help.add_row('delete-note','delete note user should input note title')
+    table_help.add_row('save-data', 'aving data for address and note books')
+    table_help.add_row('load-data','loading data for address and note books')
+    table_help.add_row('clean-folder','Some useful function to cleanup mess in yours "trash" folder')
+    table_help.add_row('exit, quit', 'commands to exit from programm')
+    
+    console.print(table_help)
 
 
 # лого

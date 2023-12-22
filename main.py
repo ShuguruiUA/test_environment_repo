@@ -5,29 +5,25 @@ import pickle
 import pathlib
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from package.james_logic import clean, boot_logo, edit_note, delete_note, add_address, add_birthday, add_email, add_phone, edit_phone, remove_phone, save, load, note_file, find_phone, find_record, find_tag, uncoming_birthdays, create_contact, create_note, show_contacts, show_notes, delete_contact
+from package.james_logic import help, clean, boot_logo, edit_note, delete_note, add_address, add_birthday, add_email, add_phone, edit_phone, remove_phone, save, load, note_file, find_phone, find_record, find_tag, uncoming_birthdays, create_contact, create_note, show_contacts, show_notes, delete_contact
+import getpass
 
 RED = "\033[91m"
 GREEN = "\033[92m"
 BLUE = "\033[94m"
 RESET = "\033[0m"
 
-# with open('image.txt', 'r') as fh:
-#     all_file = fh.read()
-#     print(f'{RED}{all_file}{RESET}')
-
-# notebook = Notebook()
 
 exit_list = ('exit', 'quit', 'end')
-note_list = list()
+help_comm = ('help','?')
 
-notes_id = 0
+
 
 command_menu = WordCompleter(['create-note', 'show-notes', 'save-notes', 'load-notes',
                               'quit', 'exit', 'find-tag', 'create-contact', 'show-contacts', 'find-record', 'add-phone',
                               'find-phone', 'delete-contact', 'remove-phone','add-email', 'add-address', 'add-birthday', 
                               'edit-phone', 'uncoming-birthdays', 'clean-folder', 'edit-note',
-                              'delete-note'])
+                              'delete-note', 'help'])
 
 
 def main():
@@ -35,7 +31,7 @@ def main():
     boot_logo()
     load()
     while True:
-        operation = prompt('Bond says: ', completer=command_menu).lower()
+        operation = prompt('Bond says (for help use help or ?): ', completer=command_menu).lower()
 
         if operation.startswith(exit_list):
 
@@ -111,11 +107,16 @@ def main():
         elif operation.startswith('clean-folder'):
             clean()
             
-        
+        elif operation.startswith(help_comm):
+            help()
 
         else:
             pass
 
 
 if __name__ == "__main__":
-    main()
+    pwd = getpass.getpass('Enter your password here: ')
+    
+    if pwd.lower() == 'pwd':
+        main()
+    print(f'You enter a wrong password! Good bye!')

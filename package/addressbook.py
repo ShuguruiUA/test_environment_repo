@@ -248,7 +248,7 @@ class AddressBook(UserDict):
         return correct_info
     
     # метод знаходження контактів, чий день народження наближається у визначений кількість днів
-    def find_birthdays_in_days(self, days: int):
+    def find_birthdays_in_days(self, days: int) -> str:
         
         today = datetime.now()
         result = []
